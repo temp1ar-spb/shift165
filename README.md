@@ -1,2 +1,2 @@
 # shift165
-fast arduino lib for 74HC595 shift register(s) with multiple functions
+fast arduino lib for 74HC165 shift register(s) with multiple functions
