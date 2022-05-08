@@ -6,14 +6,14 @@ shift165::shift165(const uint8_t dataPin, const uint8_t clockPin, const uint8_t 
     _latchPin =  latchPin;
     _chipCount =  chipCount;
 
-    pinMode(clockPin, OUTPUT);
-    pinMode(dataPin, OUTPUT);
-    pinMode(latchPin, OUTPUT);
+    pinMode(_clockPin, OUTPUT);
+    pinMode(_dataPin, OUTPUT);
+    pinMode(_latchPin, OUTPUT);
 
     // set pins low
-    WriteP(clockPin, 0);
-    WriteP(dataPin, 0);
-    WriteP(latchPin, 0);
+    writeP(_clockPin, 0);
+    writeP(_dataPin, 0);
+    writeP(_latchPin, 0);
 }
     
 uint64_t shift165::getAll() {
@@ -31,11 +31,11 @@ uint64_t shift165::getAll() {
     }
     return _values;
 }
-uint64_t shift165::getAllPrevious() {return _oldValues}
-bool shift165::getPin(uint8_t pin) {return (_values & (1ul << (_chipCount * 8 - pin)))}
-bool shift165::getPinPrevious(uint8_t pin) {return (_oldValues & (1ul << (_chipCount * 8 - pin)))}
-bool shift165::updated() {return getAll() != _oldValues}
-bool shift165::updatedPin(uint8_t pin) {return getPin(pin) != getPinPrevious(pin)}
+uint64_t shift165::getAllPrevious() {return _oldValues;}
+bool shift165::getPin(uint8_t pin) {return (_values & (1ul << (_chipCount * 8 - pin)));}
+bool shift165::getPinPrevious(uint8_t pin) {return (_oldValues & (1ul << (_chipCount * 8 - pin)));}
+bool shift165::updated() {return getAll() != _oldValues;}
+bool shift165::updatedPin(uint8_t pin) {return getPin(pin) != getPinPrevious(pin);}
 
 void writeP(uint8_t pin, bool x) {  //fast pin write
   if (x == 1) {
