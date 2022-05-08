@@ -1,6 +1,6 @@
 #include <shift165.h>
 
-shift165::shift165(const uint8_t dataPin, const uint8_t clockPin, const uint8_t latchPin, const uint8_t chipCount); {  // (data, clock, latch, chip amount)
+shift165::shift165(const uint8_t dataPin, const uint8_t clockPin, const uint8_t latchPin, const uint8_t chipCount) {  // (data, clock, latch, chip amount)
     _clockPin =  clockPin;
     _dataPin  = dataPin;
     _latchPin =  latchPin;
@@ -20,14 +20,14 @@ uint64_t shift165::getAll() {
     _oldValues = _values;
     _values = 0;
 
-    writeP(latchPin, 0);
-    writeP(latchPin, 1);
+    writeP(_latchPin, 0);
+    writeP(_latchPin, 1);
 
-    for(uint8_t i = 1; i <= (chipCount * 8); i++) {
-        bool value = readP(dataPin);
-        _values |= (value << (chipCount * 8 - i));
-        writeP(clockPin, 1);
-        writeP(clockPin, 0);
+    for(uint8_t i = 1; i <= (_chipCount * 8); i++) {
+        bool value = readP(_dataPin);
+        _values |= (value << (_chipCount * 8 - i));
+        writeP(_clockPin, 1);
+        writeP(_clockPin, 0);
     }
     return _values;
 }
