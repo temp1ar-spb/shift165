@@ -36,6 +36,7 @@ bool shift165::getPin(uint8_t pin) {return (_values & (1ul << (_chipCount * 8 - 
 bool shift165::getPinPrevious(uint8_t pin) {return (_oldValues & (1ul << (_chipCount * 8 - 1 - pin)));}
 bool shift165::updated() {return getAll() != _oldValues;}
 bool shift165::updatedPin(uint8_t pin) {return getPin(pin) != getPinPrevious(pin);}
+bool shift165::pressedPin(uint8_t pin) {return getPin(pin) && ~getPinPrevious(pin);}
 
 void writeP(uint8_t pin, bool x) {  //fast pin write
   if (x == 1) {

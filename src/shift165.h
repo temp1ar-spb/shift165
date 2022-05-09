@@ -11,6 +11,7 @@ public:
     bool getPinPrevious(uint8_t pin);
     bool updated();
     bool updatedPin(uint8_t pin);
+    bool pressedPin(uint8_t pin);
     
 private:
     uint8_t _clockPin;
