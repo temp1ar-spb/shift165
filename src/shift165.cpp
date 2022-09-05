@@ -37,7 +37,6 @@ shift165::shift165(const uint8_t dataPin, const uint8_t clockPin, const uint8_t 
 
     // set pins
     writePin(_clockPin, 0);
-    writePin(_dataPin, 0);
     writePin(_latchPin, 1);
 }
     
@@ -50,8 +49,7 @@ uint64_t shift165::getAll() {
    
     for (uint8_t j = _chipCount; j >0 ; j--) {
       for(uint8_t i = 0; i < 8; i++) {
-        bool value = readPin(_dataPin);
-        _values |= (value << (((j-1)*8) + i)); 
+        if (readPin(_dataPin) == 1) _values |= (1ul << (((j-1)*8) + i)); 
         writePin(_clockPin, 1);
         writePin(_clockPin, 0);
       }
